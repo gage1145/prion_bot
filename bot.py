@@ -6,8 +6,6 @@ import requests
 import time
 from discord.ext import commands, tasks
 
-from resurrect import resurrect
-
 
 
 def run_discord_bot():
@@ -102,5 +100,4 @@ def run_discord_bot():
              f"**Article Link:** {article_url}\n"
     return "Error retrieving article information."
 
-  resurrect()
   bot.run(os.environ["TOKEN"])
