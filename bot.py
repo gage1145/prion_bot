@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import os
 from dotenv import load_dotenv
 import xml.etree.ElementTree as ET
@@ -35,7 +35,7 @@ def run_discord_bot():
     if channel:
       await channel.send("**Searching for recent articles in PubMed using keywords: prion and PrP...**\n \n ")
       await send_recent_articles(channel, recent_articles)
-      now = datetime.datetime.now()
+      now = datetime.now()
       if (now.hour + 19) % 24 == 10:
         await send_recent_articles(channel, recent_articles)
     else:
