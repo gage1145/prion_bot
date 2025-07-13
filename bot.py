@@ -1,5 +1,6 @@
 import datetime
 import os
+from dotenv import load_dotenv
 import xml.etree.ElementTree as ET
 import discord
 import requests
@@ -9,15 +10,19 @@ from discord.ext import commands, tasks
 
 
 def run_discord_bot():
-  CHANNEL_ID = int(os.environ['CHANNEL_ID'])
-  recent_articles = []
+
+  load_dotenv()
+  CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
+  TOKEN = os.getenv("TOKEN")
 
   intents = discord.Intents.default()
   intents.message_content = True
   intents.typing = False
   intents.presences = False
-
+  
   bot = commands.Bot(command_prefix="!", intents=intents)
+
+  recent_articles = []
 
   @bot.event
   async def on_ready():
@@ -100,4 +105,4 @@ def run_discord_bot():
              f"**Article Link:** {article_url}\n"
     return "Error retrieving article information."
 
-  bot.run(os.environ["TOKEN"])
+  bot.run(TOKEN)
